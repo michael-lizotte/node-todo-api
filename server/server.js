@@ -115,6 +115,26 @@ app.get('/users/me', authenticate, (req, res) => {
     res.send(req.user);
 });
 
+app.post('/users/login', (req, res) => {
+    var body = _.pick(req.body, ['email', 'password']);
+
+    if(body.email !== undefined && body.password !== undefined) {
+        var user = new User(body);
+
+        User.findOne({'email':body.email}).then((doc) => {
+            res.send(doc);
+        }, (err) => {
+            res.status(400).send(err);
+        });
+    } else {
+        err = {
+            code: 11100,
+            errmsg: 'Invalid email or password'
+        }
+        res.status(400).send(err);
+    }
+});
+
 app.listen(port, () => {
     console.log(`Started on port ${port}`);
 });
