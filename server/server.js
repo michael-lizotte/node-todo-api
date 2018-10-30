@@ -119,11 +119,11 @@ app.post('/users/login', (req, res) => {
     var body = _.pick(req.body, ['email', 'password']);
 
     if(body.email !== undefined && body.password !== undefined) {
-        var user = new User(body);
-
-        User.findOne({'email':body.email}).then((doc) => {
-            res.send(doc);
-        }, (err) => {
+        User.findByCredentials(body.email, body.password).then((user) => {
+            return user.generateAuthToken().then((token) => {
+                res.header('x-auth', token).send(user);
+            })
+        }).catch((err) => {
             res.status(400).send(err);
         });
     } else {
