@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
+const config = require('./../config/config');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://admin:banane123@ds047592.mlab.com:47592/node-todo-api');
+mongoose.connect(config.mongoDbUrl, {
+    useNewUrlParser : true
+});
 
 module.exports = {
     mongoose

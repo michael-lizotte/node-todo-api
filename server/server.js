@@ -103,6 +103,10 @@ app.post('/users', (req, res) => {
             res.status(400).send(err);
         });
     } else {
+        err = {
+            code: 11100,
+            errmsg: 'Invalid email or password'
+        }
         res.status(400).send(err);
     }
 });
