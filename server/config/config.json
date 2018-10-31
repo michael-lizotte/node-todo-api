@@ -1,0 +1,10 @@
+{
+    "test": {
+        "MONGODB_URI": "mongodb://127.0.0.1:27017/node-todo-api-test",
+        "JWT_SECRET": "asdf212kljh32115dfsa61254dasfdsa1cxz61"
+    },
+    "development": {
+        "MONGODB_URI": "mongodb://127.0.0.1:27017/node-todo-api",
+        "JWT_SECRET": "asdf123gfgd432mdaasdf3242fdsa156dsa6231jkfdsa"
+    }
+}
