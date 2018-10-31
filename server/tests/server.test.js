@@ -15,7 +15,10 @@ describe('POST /todos', () => {
         
         request(app)
             .post('/todos')
-            .send({text})
+            .set('x-auth', users[3].tokens[0].token)
+            .send({
+                text
+            })
             .expect(200)
             .expect((res) => {
                 expect(res.body.text).toBe(text);
@@ -36,6 +39,7 @@ describe('POST /todos', () => {
     it ('Should not create a todo with invalid body data', (done) => {
         request(app)
             .post('/todos')
+            .set('x-auth', users[3].tokens[0].token)
             .send({})
             .expect(400)
             .end((err, res) => {
@@ -55,9 +59,10 @@ describe('GET /todos', () => {
     it('Should get all todos', (done) => {
         request(app)
             .get('/todos')
+            .set('x-auth', users[3].tokens[0].token)
             .expect(200)
             .expect((res) => {
-                expect(res.body.todos.length).toBe(4);
+                expect(res.body.todos.length).toBe(3);
             })
             .end(done);
     });
