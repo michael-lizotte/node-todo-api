@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
+    "start-local": "export NODE_ENV=development && npm run start",
     "test": "export NODE_ENV=test && mocha -t 5000 server/**/*.test.js",
     "test-watch": "nodemon --exec 'npm test'"
   },
